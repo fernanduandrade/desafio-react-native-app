@@ -1,0 +1,12 @@
+{
+  "name": "appzinho",
+  "displayName": "appzinho",
+  "expo": {
+    "name": "appzinho",
+    "slug": "appzinho",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
