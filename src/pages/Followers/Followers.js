@@ -23,7 +23,7 @@ export default function Followers({route}) {
 
 			</View>
 			<Image style={{ width: 100, height: 100, marginRight: 50, borderRadius: 50, borderColor: '#ffffff', borderWidth: 2, top: -50, marginLeft: 130 }} source={{ uri: `${imgAvatar}` }} />
-			<Text style={{ color: '#ffffff', paddingLeft: 10, top: -20}}>repositio description</Text>
+			<Text style={{ color: '#ffffff', paddingLeft: 10, top: -20}}>repositio descriptionnn</Text>
 			
 
 		</View>
