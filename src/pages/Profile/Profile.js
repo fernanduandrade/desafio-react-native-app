@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
-export default function Profile({route}) {
+export default function Profile({route, navigation}) {
 
     const user = route.params.user;
 
@@ -26,7 +26,7 @@ export default function Profile({route}) {
 			flex: 1,
 			backgroundColor: '#292929'
 		}}>
-			<View style={{ backgroundColor: '#1F1F1F', flex: 0.30, width: 380, flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, paddingLeft: 10 }}>
+			<View style={{ backgroundColor: '#1F1F1F', flex: 0.40, width: 380, flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, paddingLeft: 10 }}>
 				<Text style={{ color: '#ffffff' }}>@{githubUser.login}</Text>
 
 				<TouchableOpacity style={{ flexDirection: 'row' }} onPress={() => navigation.navigate('Login')}>
@@ -44,11 +44,15 @@ export default function Profile({route}) {
 			</View>
 			<View style={{ flexDirection: 'row', backgroundColor: '#383838', top: 30, height: 80}}>
 				<View style={{ flexDirection: 'column'}}>
-					<Text style={{ color: '#ffffff', fontSize: 40, paddingLeft: 20 }}>{githubUser.followers}</Text>
+					<TouchableOpacity onPress={() => navigation.navigate('Seguidores', {imgAvatar: githubUser.avatar_url})}>
+						<Text style={{ color: '#ffffff', fontSize: 40, paddingLeft: 20 }}>{githubUser.followers}</Text>
+					</TouchableOpacity>
 					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 20 }}>Seguidores</Text>
 				</View>
 				<View style={{ flexDirection: 'column' }}>
-					<Text style={{ color: '#ffffff', paddingLeft: 80, fontSize: 40 }}>{githubUser.following}</Text>
+					<TouchableOpacity onPress={() => navigation.navigate('Tabs', {params: {imgAvatar: githubUser.avatar_url}, screen: 'Seguidores'})}>
+						<Text style={{ color: '#ffffff', paddingLeft: 80, fontSize: 40 }}>{githubUser.following}</Text>
+					</TouchableOpacity>
 					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 85 }}>Seguindo</Text>
 				</View>
 				<View style={{ flexDirection: 'column' }}>
