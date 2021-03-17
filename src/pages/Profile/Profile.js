@@ -19,7 +19,8 @@ export default function Profile({route, navigation}) {
 			}
 		};
 		loadUser();
-	});
+	}, []);
+
 
 	return (
 		<View style={{
@@ -44,19 +45,21 @@ export default function Profile({route, navigation}) {
 			</View>
 			<View style={{ flexDirection: 'row', backgroundColor: '#383838', top: 30, height: 80}}>
 				<View style={{ flexDirection: 'column'}}>
-					<TouchableOpacity onPress={() => navigation.navigate('Seguidores', {imgAvatar: githubUser.avatar_url})}>
+					<TouchableOpacity onPress={() => navigation.navigate('Seguidores', {userFollowers: githubUser.followers_url, followersCount: githubUser.followers})}>
 						<Text style={{ color: '#ffffff', fontSize: 40, paddingLeft: 20 }}>{githubUser.followers}</Text>
 					</TouchableOpacity>
 					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 20 }}>Seguidores</Text>
 				</View>
 				<View style={{ flexDirection: 'column' }}>
-					<TouchableOpacity onPress={() => navigation.navigate('Tabs', {params: {imgAvatar: githubUser.avatar_url}, screen: 'Seguidores'})}>
+					<TouchableOpacity onPress={() => navigation.navigate('Seguindo', {userFollwing: githubUser.login ,followingsCount: githubUser.following })}>
 						<Text style={{ color: '#ffffff', paddingLeft: 80, fontSize: 40 }}>{githubUser.following}</Text>
 					</TouchableOpacity>
-					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 85 }}>Seguindo</Text>
+					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 90 }}>Seguindo</Text>
 				</View>
 				<View style={{ flexDirection: 'column' }}>
-					<Text style={{ color: '#ffffff', paddingLeft: 80, fontSize: 40 }}>{githubUser.public_repos}</Text>
+					<TouchableOpacity onPress={() => navigation.navigate('Repos', {userRepos: githubUser.repos_url, repoCount: githubUser.public_repos})}>
+						<Text style={{ color: '#ffffff', paddingLeft: 80, fontSize: 40 }}>{githubUser.public_repos}</Text>
+					</TouchableOpacity>
 					<Text style={{ color: '#ffffff', fontSize: 10, paddingLeft: 80 }}>Repositórios</Text>
 				</View>
 			</View>
