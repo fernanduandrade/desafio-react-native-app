@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import axios from 'axios';
 
-import RepoCard from '../../components/repoCard.js';
+import RepoCard from '../../components/RepoCard/RepoCard.js';
 
 export default function Repos({route}) {
 
@@ -35,6 +35,7 @@ export default function Repos({route}) {
 				<Text style={{color: "#FFFFFF", top: 15, paddingLeft: 90, fontWeight: 'bold'}}>{repoCount} repositórios</Text>
 		</View>
 
+		<ScrollView>
 		{repos.map((repo) => (
 			
 			<RepoCard 
@@ -44,6 +45,8 @@ export default function Repos({route}) {
 				repoStars={repo.stargazers_count}
 			/>
 		))}
+
+		</ScrollView>
 
 	</View>
     );

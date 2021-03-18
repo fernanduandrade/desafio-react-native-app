@@ -1,16 +1,16 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Image,} from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Login from './src/pages/Login/Login';
-import Profile from './src/pages/Profile/Profile';
-import Repos from './src/pages/Repos/Repos';
-import Followers from './src/pages/Followers/Followers';
-import Following from './src/pages/Following/Following';
+import Login from './src/screens/Login/Login';
+import Profile from './src/screens/Profile/Profile';
+import Repos from './src/screens/Repos/Repos';
+import Followers from './src/screens/Followers/Followers';
+import Following from './src/screens/Following/Following';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -20,13 +20,8 @@ function Tabs() {
     return (
 	
 	<Tab.Navigator tabBarOptions={{
-		activeTintColor: '#FFCE00',
+		activeTintColor: 'black',
 		inactiveTintColor: 'gray',
-		style: {
-			borderTopRightRadius: 30,
-			borderTopLeftRadius: 30,
-			position:'absolute',
-		  }
 	}}
 >
 	    <Tab.Screen 
@@ -53,7 +48,7 @@ function Tabs() {
 	    <Tab.Screen 
 	    	name="Seguindo" 
 	    	component={Following}
-	    	options={{tabBarIcon: ({ tintColor }) => (
+	    	options={{tabBarIcon: ({ tintColor, focused }) => (
 		        <Image source={require('./src/assets/images/people.png')} style={{ width: 26, height: 26, tintColor: tintColor }}/>
 		      ),}} 
 	    />
@@ -68,6 +63,6 @@ export default function App() {
 		<Stack.Screen name="Login" component={Login} />
 		<Stack.Screen name="Tabs" component={Tabs} />
 	    </Stack.Navigator>
-	</NavigationContainer>
-    );
+	</NavigationContainer>    
+	);
 }

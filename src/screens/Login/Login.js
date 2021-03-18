@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { View, TextInput, Image}from 'react-native';
-import AppButton from '../../components/Button';
+import AppButton from '../../components/Buttom/Button';
 
 export default function Login({navigation}) {
 
