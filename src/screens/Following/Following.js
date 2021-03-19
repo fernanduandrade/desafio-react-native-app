@@ -1,38 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, ScrollView } from 'react-native';
 import axios from 'axios';
 
 import Header from '../../components/Header/Header';
 import FollowCard from '../../components/FollowCard/FollowCard';
+import GithubUserContext from '../../context/GithubUserContext';
 
 import styles from './styles';
 
-export default function Following({route}) {
+export default function Following() {
 
-	const {userFollwing} = route.params;
-	const {followingsCount} = route.params;
-
-	const [following, setFollowing] = useState([])
+	const {githubUser, githubFollowing, setGithubFollowing} = useContext(GithubUserContext)
 
 	useEffect(() => {
-		async function loadFollowingUsers() {
+		async function loadFollowingUser() {
 			try {
-				const result = await axios.get(`https://api.github.com/users/${userFollwing}/following?per_page=500`);
-				setFollowing(result.data);
+				const result = await axios.get(`https://api.github.com/users/${githubUser.login}/following?per_page=500`);
+				setGithubFollowing(result.data);
 
 			} catch (err) {
 				console.log(err);
 			}
 		};
-		loadFollowingUsers();
+		loadFollowingUser();
 	}, []);
 
     return (
 		<View style={styles.container}>
-			<Header counter={followingsCount} description="Seguindo" />
+			<Header counter={githubUser.following} description="Seguindo" />
 			
 			<ScrollView>
-				{following.map((following) => (
+				{githubFollowing.map((following) => (
 					<FollowCard  
 						key={following.id}
 						useLogin={following.login}

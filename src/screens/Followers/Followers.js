@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, ScrollView } from 'react-native';
 import axios from 'axios';
 
 import Header from '../../components/Header/Header';
 import FollowCard from '../../components/FollowCard/FollowCard';
+import GithubUserContext from '../../context/GithubUserContext';
+
 import styles from './styles';
 
-export default function Followers({route}) {
+export default function Followers() {
 
-	const {userFollowers} = route.params;
-	const {followersCount} = route.params;
-
-	const [followers, setFollowers] = useState([])
+	const {githubUser, githubFollowers, setGithubFollowers} = useContext(GithubUserContext)
 
 	useEffect(() => {
 		async function loadFollowers() {
 			try {
-				const result = await axios.get(`${userFollowers}?per_page=500`);
-				setFollowers(result.data);
+				const result = await axios.get(`https://api.github.com/users/${githubUser.login}/followers?per_page=500`);
+				setGithubFollowers(result.data);
 
 			} catch (err) {
 				console.log(err);
@@ -28,10 +27,10 @@ export default function Followers({route}) {
 
     return (
 		<View style={styles.container}>
-			<Header counter={followersCount} description="seguidores" />
+			<Header counter={githubUser.followers} description="seguidores" />
 			
 			<ScrollView>
-				{followers.map((follower) => (
+				{githubFollowers.map((follower) => (
 					<FollowCard  
 						key={follower.id}
 						useLogin={follower.login}

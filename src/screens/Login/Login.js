@@ -8,13 +8,6 @@ export default function Login({navigation}) {
 
     const [textInputUser, setTextInputUser] = useState('');
 
-    const checkTextInput = () => {
-	if(!textInputUser.trim()) {
-	    alert('Campo obrigatário');
-	    return;
-	}
-    };
-    
     return (
 		<View style={styles.container}>
 			<Image style={styles.loginImg} source={require('../../assets/images/github.png')} />
@@ -25,7 +18,7 @@ export default function Login({navigation}) {
 				placeholder="Usuário" 
 			/>
 
-			<AppButton title="ENTRAR ➜" onPress={() => navigation.navigate('Tabs', {params: {user: textInputUser}, screen: 'Perfil'})} /> 
+			<AppButton title="ENTRAR ➜" onPress={() => navigation.navigate('Tabs', {params: {userInput: textInputUser}, screen: 'Perfil'})} /> 
 		</View>
     );
 }

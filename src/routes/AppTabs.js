@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Image} from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';

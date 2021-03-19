@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         marginTop: 6
     },
     repoDescription: {
-        color: '#ffffff', 
+        color: '#AFAFAF', 
         paddingLeft: 10, 
         top: -20
     },

@@ -9,11 +9,11 @@ const FollowCard = props => (
         <View style={styles.square}>
 
         </View>
-
-        <Image style={styles.avatarImg} source={{ uri: `${props.avatarUrl}` }} />
-        <Text style={styles.useLogin}>{props.useLogin}</Text>
-        <Text style={styles.nextUser}>➜</Text>
-        
+        <View style={styles.rowContainer}>
+            <Image style={styles.avatarImg} source={{ uri: `${props.avatarUrl}` }} />
+            <Text style={styles.useLogin}>{props.useLogin}</Text>
+            <Text style={styles.nextUser}>➜</Text>
+        </View>
 
     </View>
 );

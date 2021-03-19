@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import axios from 'axios';
+import axios from 'axios'
 
 import UserInfo from '../../components/UserInfo/UserInfo';
+import GithubUserContext from '../../context/GithubUserContext';
 
 import styles from './styles';
 
 export default function Profile({route, navigation}) {
 
-    const user = route.params.user;
+    const {userInput} = route.params;
 
-	const [githubUser, setGithubUser] = useState([]);
+	const {githubUser, setGithubUser} = useContext(GithubUserContext)
 
 	useEffect(() => {
 		async function loadUser() {
 			try {
-				const result = await axios.get(`https://api.github.com/users/${user}`);
+				const result = await axios.get(`https://api.github.com/users/${userInput}`);
 				setGithubUser(result.data);
 
 			} catch (err) {
 				console.log(err);
 			}
 		};
+
 		loadUser();
 	}, []);
 
@@ -39,9 +41,8 @@ export default function Profile({route, navigation}) {
 
 			<Image style={styles.userAvatarImg} source={{ uri: `${githubUser.avatar_url}` }} />
 			
-			<View style={styles.userBio}>
+			<View style={styles.userDescription}>
 				<View style={styles.square}></View>
-
 				<Text style={styles.userName}>{githubUser.name}</Text>
 				<Text style={styles.userLocation}>{githubUser.location}</Text>
 			</View>
@@ -49,23 +50,22 @@ export default function Profile({route, navigation}) {
 			<View style={styles.userInfo}>
 				<UserInfo
 					counter={githubUser.followers} description="Seguidores"
-					onPress={() => navigation.navigate('Seguidores', {userFollowers: githubUser.followers_url, followersCount: githubUser.followers})} 
+					onPress={() => navigation.navigate('Seguidores')} 
 				/>
 				<UserInfo
 					counter={githubUser.following} description="Seguindo"
-					onPress={() => navigation.navigate('Seguindo', {userFollwing: githubUser.login ,followingsCount: githubUser.following })} 
+					onPress={() => navigation.navigate('Seguindo')} 
 				/>
 				<UserInfo 
 					counter={githubUser.public_repos} description="Repositórios"
-					onPress={() => navigation.navigate('Repos', {userRepos: githubUser.repos_url, repoCount: githubUser.public_repos})} 
+					onPress={() => navigation.navigate('Repos')} 
 				/>
 			</View>
 
 			<View style={styles.userBioContainer}>
 				<View style={styles.square}></View>
 				<Text style={styles.userBio}>BIO</Text>
-				<Text style={styles.userBioInfo}>{githubUser.bio}
-				</Text>	
+				<Text style={styles.userBioInfo}>{githubUser.bio}</Text>	
 			</View>
 		</View>
 	);

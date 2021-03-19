@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         top: -50, 
         marginLeft: 130
     },
-    userBio: {
+    userDescription: {
         flexDirection: 'column'
     },
     square: {
@@ -58,18 +58,19 @@ const styles = StyleSheet.create({
         top: -24
     },
     userLocation: {
-        color: '#ffffff', 
+        color: '#AFAFAF', 
         paddingLeft: 10, 
         top: -20
     },
     userInfo: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
+        justifyContent: 'space-around', 
         backgroundColor: '#383838', 
         top: 30, 
         height: 80
     },
     userBioContainer: {
-        flexDirection: 'column', 
+        flexDirection: 'column',
         top: 60
     },
     userBio: {
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
         top: -24
     },
     userBioInfo: {
-        color: '#ffffff', 
+        color: '#AFAFAF', 
         paddingLeft: 10, 
         top: -20
     }

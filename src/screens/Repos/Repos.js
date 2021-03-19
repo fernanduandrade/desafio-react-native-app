@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { View, ScrollView } from 'react-native';
+import React, {useEffect, useContext} from 'react';
 import axios from 'axios';
+
+import { View, ScrollView } from 'react-native';
 
 import Header from '../../components/Header/Header';
 import RepoCard from '../../components/RepoCard/RepoCard.js';
 
+import GithubUserContext from '../../context/GithubUserContext';
+
 import styles from './styles';
 
-export default function Repos({route}) {
+export default function Repos() {
 
-	const {userRepos} = route.params;
-	const {repoCount} = route.params;
-	const [repos, setRepos] = useState([])
+	const {githubUser, githubRepos, setGithubRepos} = useContext(GithubUserContext)
 
 	useEffect(() => {
 		async function loadRepos() {
 			try {
-				const result = await axios.get(`${userRepos}`);
-				setRepos(result.data);
+				const result = await axios.get(`https://api.github.com/users/${githubUser.login}/repos`);
+				setGithubRepos(result.data);
 
 			} catch (err) {
 				console.log(err);
@@ -25,13 +26,14 @@ export default function Repos({route}) {
 		};
 		loadRepos();
 	}, []);
+	
 
     return (
 	<View style={styles.container}>
-		<Header counter={repoCount} description="repositórios" />
+		<Header counter={githubUser.public_repos} description="repositórios" />
 
 		<ScrollView>
-			{repos.map((repo) => (
+			{githubRepos.map((repo) => (
 				
 				<RepoCard 
 					key={repo.id} 
