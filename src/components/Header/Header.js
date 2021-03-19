@@ -1,12 +1,13 @@
 import React from 'react'; 
+import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
-const Header = props => (
-    <View style={styles.container}>
+const Header = ({description, counter}) => (
+    <View style={styles.banner}>
         <TouchableOpacity >
             <Text style={styles.headerGoBack}>←</Text>
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>{props.repoDescription}</Text>
+        <Text style={styles.headerTitle}>{counter} {description}</Text>
     </View>
 )
 

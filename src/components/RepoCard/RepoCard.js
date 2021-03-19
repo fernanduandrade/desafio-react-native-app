@@ -13,11 +13,11 @@ const RepoCard = props => (
 		<Text style={styles.repoDescription}>{props.Repodescription}</Text>
 		
 		<View style={styles.repoInfo}>
-			<Image style={styles.repoStarImg} source={require('../assets/images/star2.png')} />
+			<Image style={styles.repoStarImg} source={require('../../assets/images/star2.png')} />
 			<Text style={styles.repoStartText}>{props.repoStars}</Text>
 
-			<Image style={styles.lockImg} source={require('../assets/images/lock2.png')} />
-			<Image style={styles.unlockImg} source={require('../assets/images/lock3.png')} />
+			<Image style={styles.lockImg} source={require('../../assets/images/lock2.png')} />
+			<Image style={styles.unlockImg} source={require('../../assets/images/lock3.png')} />
 		</View>
 
 	</View>

@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
-import { View, TextInput, Image}from 'react-native';
-import AppButton from '../../components/Buttom/Button';
+import { View, TextInput, Image} from 'react-native';
+import AppButton from '../../components/Button/Button';
+
+import styles from './styles';
 
 export default function Login({navigation}) {
 
@@ -14,20 +16,16 @@ export default function Login({navigation}) {
     };
     
     return (
-	<View style={{
-	    flex: 1,
-	    justifyContent: 'center',
-	    alignItems: 'center',
-	    backgroundColor: '#292929'
-	}}>
-	    <Image style={{height: 140, width: 90, resizeMode: 'contain'}} source={require('../../assets/images/github.png')} />
-	    <TextInput
-		style={{backgroundColor: '#ffffff', height: 50, width: 310, borderWidth: 1, borderRadius: 8, paddingLeft: 10}}
-		onChangeText={(value) => setTextInputUser(value)}
-		value={textInputUser}
-		placeholder="Usuário" />
+		<View style={styles.container}>
+			<Image style={styles.loginImg} source={require('../../assets/images/github.png')} />
+			<TextInput
+				style={styles.loginInput}
+				onChangeText={(value) => setTextInputUser(value)}
+				value={textInputUser}
+				placeholder="Usuário" 
+			/>
 
-	    <AppButton title="ENTRAR ➜" onPress={() => navigation.navigate('Tabs', {params: {user: textInputUser}, screen: 'Perfil'})} /> 
-	</View>
+			<AppButton title="ENTRAR ➜" onPress={() => navigation.navigate('Tabs', {params: {user: textInputUser}, screen: 'Perfil'})} /> 
+		</View>
     );
 }

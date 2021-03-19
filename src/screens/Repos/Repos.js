@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import axios from 'axios';
 
+import Header from '../../components/Header/Header';
 import RepoCard from '../../components/RepoCard/RepoCard.js';
+
+import styles from './styles';
 
 export default function Repos({route}) {
 
@@ -24,27 +27,19 @@ export default function Repos({route}) {
 	}, []);
 
     return (
-	<View style={{
-	    flex: 1,
-	    backgroundColor: '#292929'
-	}}>
-		<View style={{ backgroundColor: '#1F1F1F', width: 400, flexDirection: 'row', justifyContent: 'flex-start'}} >
-				<TouchableOpacity >
-					<Text style={{color: '#ffffff', fontWeight: 'bold', fontSize: 30, paddingLeft: 10}}>←</Text>
-				</TouchableOpacity>
-				<Text style={{color: "#FFFFFF", top: 15, paddingLeft: 90, fontWeight: 'bold'}}>{repoCount} repositórios</Text>
-		</View>
+	<View style={styles.container}>
+		<Header counter={repoCount} description="repositórios" />
 
 		<ScrollView>
-		{repos.map((repo) => (
-			
-			<RepoCard 
-				key={repo.id} 
-				repoName={repo.name} 
-				Repodescription={repo.description} 
-				repoStars={repo.stargazers_count}
-			/>
-		))}
+			{repos.map((repo) => (
+				
+				<RepoCard 
+					key={repo.id} 
+					repoName={repo.name} 
+					Repodescription={repo.description} 
+					repoStars={repo.stargazers_count}
+				/>
+			))}
 
 		</ScrollView>
 

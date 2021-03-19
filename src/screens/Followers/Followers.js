@@ -28,11 +28,12 @@ export default function Followers({route}) {
 
     return (
 		<View style={styles.container}>
-			<Header repoDescription={followersCount} />
+			<Header counter={followersCount} description="seguidores" />
 			
 			<ScrollView>
 				{followers.map((follower) => (
 					<FollowCard  
+						key={follower.id}
 						useLogin={follower.login}
 						avatarUrl={follower.avatar_url}
 					/>

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Header from '../../components/Header/Header';
 import FollowCard from '../../components/FollowCard/FollowCard';
+
 import styles from './styles';
 
 export default function Following({route}) {
@@ -27,19 +28,20 @@ export default function Following({route}) {
 	}, []);
 
     return (
-	<View style={styles.container}>
-		<Header repoDescription={followingsCount} />
-		
-		<ScrollView>
-			{following.map((following) => (
-				<FollowCard  
-					useLogin={following.login}
-					avatarUrl={following.avatar_url}
-				/>
+		<View style={styles.container}>
+			<Header counter={followingsCount} description="Seguindo" />
 			
-			))}
-		</ScrollView>
-	</View>
+			<ScrollView>
+				{following.map((following) => (
+					<FollowCard  
+						key={following.id}
+						useLogin={following.login}
+						avatarUrl={following.avatar_url}
+					/>
+				
+				))}
+			</ScrollView>
+		</View>
     );
 };
 
