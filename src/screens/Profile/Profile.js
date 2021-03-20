@@ -1,22 +1,25 @@
-import React, { useEffect, useContext } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import axios from 'axios'
+import React, { useState, useEffect, useContext } from 'react';
+import { View, Text, Image, ActivityIndicator } from 'react-native';
+
+import api from '../../services/api';
 
 import UserInfo from '../../components/UserInfo/UserInfo';
+import LoggedUser from '../../components/LoggedUser/LoggedUser';
+import SaveUser from '../../components/SaveUser/SaveUser';
 import GithubUserContext from '../../context/GithubUserContext';
 
 import styles from './styles';
 
-export default function Profile({route, navigation}) {
-
-    const {userInput} = route.params;
-
-	const {githubUser, setGithubUser} = useContext(GithubUserContext)
+export default function Profile({navigation}) {
+    
+	const {githubUser, setGithubUser, textInputUser, loggedUser} = useContext(GithubUserContext)
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+	
 		async function loadUser() {
 			try {
-				const result = await axios.get(`https://api.github.com/users/${userInput}`);
+				const result = await api.get(`${textInputUser}`);
 				setGithubUser(result.data);
 
 			} catch (err) {
@@ -30,15 +33,8 @@ export default function Profile({route, navigation}) {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.profileHeader}>
-				<Text style={styles.userLogin}>@{githubUser.login}</Text>
-
-				<TouchableOpacity style={styles.userLogout} onPress={() => navigation.navigate('Login')}>
-					<Text style={styles.userLogoutText}>Sair</Text>
-					<Image style={styles.userLogoutImg} source={require('../../assets/images/logout2.png')} />
-				</TouchableOpacity>
-			</View>
-
+			{loggedUser == textInputUser ? <LoggedUser githubUserLogin={githubUser.login}/> : <SaveUser githubUserLogin={githubUser.login}/>}
+		
 			<Image style={styles.userAvatarImg} source={{ uri: `${githubUser.avatar_url}` }} />
 			
 			<View style={styles.userDescription}>

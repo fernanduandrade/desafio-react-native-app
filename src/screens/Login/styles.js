@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
         borderWidth: 1, 
         borderRadius: 8, 
         paddingLeft: 10
+    },
+    requiredInput: {
+        top: -37,
+        marginLeft: 150
     }
 });
 

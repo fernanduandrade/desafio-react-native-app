@@ -1,6 +1,7 @@
-import React, { useEffect, useContext } from 'react';
-import { View, ScrollView } from 'react-native';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, ScrollView, ActivityIndicator } from 'react-native';
+
+import api from '../../services/api';
 
 import Header from '../../components/Header/Header';
 import FollowCard from '../../components/FollowCard/FollowCard';
@@ -11,12 +12,14 @@ import styles from './styles';
 export default function Followers() {
 
 	const {githubUser, githubFollowers, setGithubFollowers} = useContext(GithubUserContext)
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		async function loadFollowers() {
 			try {
-				const result = await axios.get(`https://api.github.com/users/${githubUser.login}/followers?per_page=500`);
+				const result = await api.get(`${githubUser.login}/followers?per_page=500`);
 				setGithubFollowers(result.data);
+				setLoading(true);
 
 			} catch (err) {
 				console.log(err);
@@ -30,13 +33,13 @@ export default function Followers() {
 			<Header counter={githubUser.followers} description="seguidores" />
 			
 			<ScrollView>
-				{githubFollowers.map((follower) => (
+				{loading ? githubFollowers.map((follower) => (
 					<FollowCard  
 						key={follower.id}
 						useLogin={follower.login}
 						avatarUrl={follower.avatar_url}
 					/>
-				))}
+				)) : <ActivityIndicator size="large" color="#ffffff" />}
 			</ScrollView>
 
 		</View>

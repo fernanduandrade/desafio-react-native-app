@@ -2,13 +2,19 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import styles from './styles';
 
-const Header = ({description, counter}) => (
-    <View style={styles.banner}>
-        <TouchableOpacity >
-            <Text style={styles.headerGoBack}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>{counter} {description}</Text>
-    </View>
-)
+import { useNavigation } from '@react-navigation/native'
 
-export default Header;
+export default function Header({description, counter}) {
+
+    const navigation = useNavigation();
+
+    return (
+        <View style={styles.banner}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Text style={styles.headerGoBack}>←</Text>
+            </TouchableOpacity>
+            <Text style={styles.headerTitle}>{counter} {description}</Text>
+        </View>
+    );
+
+};

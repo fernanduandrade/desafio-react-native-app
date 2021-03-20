@@ -1,21 +1,28 @@
-import React from 'react';
-import {Image, View, Text} from 'react-native';
-
+import React, {useContext} from 'react';
+import {Image, View, Text, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native'
 import styles from './styles';
 
-const FollowCard = props => (
+import GithubUserContext from '../../context/GithubUserContext';
 
-    <View style={styles.followView}>
-        <View style={styles.square}>
+export default function FollowCard(props) {
 
+    const navigation = useNavigation();
+
+    const {setTextInputUser} = useContext(GithubUserContext);
+
+    return (
+        <View style={styles.followView}>
+                
+                <View style={styles.square}></View>
+                <TouchableOpacity onPress={() => navigation.push('Tabs', setTextInputUser(props.useLogin))}> 
+                    <View style={styles.rowContainer}>
+                        <Image style={styles.avatarImg} source={{ uri: `${props.avatarUrl}` }} />
+                        <Text style={styles.useLogin}>{props.useLogin}</Text>
+                        <Text style={styles.nextUser}>➜</Text>
+                    </View>
+
+                </TouchableOpacity>
         </View>
-        <View style={styles.rowContainer}>
-            <Image style={styles.avatarImg} source={{ uri: `${props.avatarUrl}` }} />
-            <Text style={styles.useLogin}>{props.useLogin}</Text>
-            <Text style={styles.nextUser}>➜</Text>
-        </View>
-
-    </View>
-);
-
-export default FollowCard;
+    );
+};

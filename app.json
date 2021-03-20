@@ -1,9 +1,9 @@
 {
-  "name": "appzinho",
-  "displayName": "appzinho",
+  "name": "labluby app",
+  "displayName": "labluby app",
   "expo": {
-    "name": "appzinho",
-    "slug": "appzinho",
+    "name": "labluby app",
+    "slug": "labluby app",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
