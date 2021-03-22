@@ -42,5 +42,10 @@ npm run android
 </li>
 
 ## Notas
+- Caso não encontre o caminho do SDK ou tenha mais de um SDK, poderá criar um arquivo no diretório android chamado `local.properties` e especificar o caminho do SDK. Exemplo:
 
-Siga [essa documentação](https://react-native.rocketseat.dev/) caso não tenha preparado o seu ambiente de desenvolvimento.
+```text
+sdk.dir = /Users/USERNAME/AppData/Local/Android/SDK
+```
+- [Resolução](https://stackoverflow.com/questions/27620262/sdk-location-not-found-define-location-with-sdk-dir-in-the-local-properties-fil) para caso não encontrar o SDK. 
+- Siga [essa documentação](https://react-native.rocketseat.dev/) caso não tenha preparado o seu ambiente de desenvolvimento.
